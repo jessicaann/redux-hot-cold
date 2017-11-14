@@ -5,13 +5,11 @@ describe('gameReducer', () => {
     //fake state
     it('Should set the initial state when nothing is passed in', () => {
         const state = gameReducer(undefined, {type: '_UNKNOWN'});
-        state.correctAnswer = 9;
         expect(state).toEqual({
             guesses: [],
             feedback: 'Make your guess!',
             showInfoModal: false,
-            correctAnswer: 9
-            //unable to test correctAnswer because the random numbers won't match
+            correctAnswer: state.correctAnswer
         });
     });
     it('Should return the current state on an unknown action', () => {
@@ -23,11 +21,10 @@ describe('gameReducer', () => {
         it('Should reset to initial state', () => {
             let state;
             state = gameReducer(state, newGame());
-            state.correctAnswer = 9;
             expect(state).toEqual({
                 guesses: [],
                 feedback: 'Make your guess!',
-                correctAnswer: 9,
+                correctAnswer: state.correctAnswer,
                 showInfoModal: false
             });
         });
@@ -40,12 +37,15 @@ describe('gameReducer', () => {
                 showInfoModal: false,
                 correctAnswer: 9
             };
-            let guess = 10;
-            state = gameReducer(state, makeGuess(guess));
-            expect(state.feedback).toEqual('You\'re Hot!');
-            //I don't think this is right because what if you change that phrase and forget to change the test?
+            const guesses = [{guess: 70, feedback: 'You\'re Ice Cold...'}, {guess: 40, feedback: 'You\'re Cold...'}, {guess: 20, feedback: 'You\'re Warm'}, {guess: 10, feedback: 'You\'re Hot!'}, {guess: 9, feedback: 'You got it!'}]
+            for(let i=0; i < guesses.length; i++){
+                let guess = guesses[i].guess;
+                state = gameReducer(state, makeGuess(guess));
+                expect(state.feedback).toEqual(guesses[i].feedback);
+            };
         })
         it('Should add guess to guesses list', () => {
+            //use a for loop and add many guesses in 
             let state = {
                 guesses: [4,5,78,10],
                 feedback: 'Make your guess!',
@@ -63,6 +63,7 @@ describe('gameReducer', () => {
         })
         it('Should reject non-number guesses', () => {
             let state;
+            //do a for loop and send varying data types (null, string, negativenum, etc)
             let guess = 'guess';
             state = gameReducer(state, makeGuess(guess));
             expect(state.feedback).toEqual('Please enter a valid number');

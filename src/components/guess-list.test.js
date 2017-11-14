@@ -9,7 +9,12 @@ describe('Should render without crashing', () => {
         shallow(<GuessList guesses={guesses}/>);
     });
     it('Should render guesses', () => {
+        const values = [1, 2, 3, 4, 5, 6];            
         const wrapper = shallow(<GuessList guesses={guesses}/>);
-        expect(wrapper.instance().props.guesses.length).toEqual(guesses.length);
+        const items = wrapper.find('li');
+        expect(items.length).toEqual(values.length);
+        values.forEach((value, index) => {
+            expect(items.at(index).text()).toEqual(value.toString());
+        });
     });
 })

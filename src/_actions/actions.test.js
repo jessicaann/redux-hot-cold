@@ -8,6 +8,12 @@ describe('newGame', () => {
         expect(action.type).toEqual(NEW_GAME);
         expect(action.correctAnswer.exists);
     })
+    it('Should return a num between 1 and 100', () => {
+        const action = newGame();
+        const randNum = action.correctAnswer;
+        expect(randNum).toBeGreaterThanOrEqual(1);
+        expect(randNum).toBeLessThanOrEqual(100);
+    })
 })
 
 describe('makeGuess', () => {

@@ -25,20 +25,6 @@ describe('<Game />', () => {
         // Because we are just testing we can add guesses to the state, 
         expect(instance.state.guesses.length).toEqual(guesses.length);
     });
-    {/*it('Can set state for new game', () => {
-        //create a fake setting for the state including a number
-        //simulate an instance of using newGame
-        const wrapper = shallow(<Game />);
-        const instance = wrapper.instance();
-        seedGuesses.forEach(instance.guess);
-        wrapper.update();
-        const beforeNewState = wrapper.state;
-        instance.newGame;
-        wrapper.update();
-        //compare the resulting state to the correct state & make sure the number is different than the previous number & is between 1 and 100
-        expect(wrapper.state).toNotEqual(beforeNewState);
-        expect(wrapper.state('correctAnswer')).//is between 1 & 100?
-    })*/}
 });
 
 //Tests

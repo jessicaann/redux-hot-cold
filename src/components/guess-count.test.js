@@ -10,9 +10,8 @@ describe('<GuessCount />', () => {
     it('Should receive and render props', () => {
         const count = 15;
         const wrapper = shallow(<GuessCount count = {count}/>);
-        const instance = wrapper.instance();
-        console.log(wrapper);
-        expect(instance.props.count).toEqual(count);
         expect(wrapper.find('span').text()).toEqual(`${count}`);
     });
 })
+
+//stateless/DOM components can only be tested on rendering stuff
