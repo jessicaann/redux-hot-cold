@@ -11,7 +11,7 @@ describe('<GuessForm />', () => {
     it('Should fire onGuess function on form submit', () => {
         const dispatch = jest.fn();
         const wrapper = mount(<GuessForm dispatch={dispatch}/>);
-        const value = 1;
+        const value = '1';
         wrapper.find('input[type="text"]').instance().value = value;
         wrapper.simulate('submit');
         expect(dispatch).toHaveBeenCalledWith(makeGuess(value));
